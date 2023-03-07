@@ -12,7 +12,13 @@ export class UsersService {
   }
 
   async findOne(id: string): Promise<User | null> {
-    return await this.repo.findOneBy({ id });
+    try {
+      const user = await this.repo.findOneBy({ id });
+
+      return user;
+    } catch (e) {
+      return null;
+    }
   }
 
   async create(user: User): Promise<User> {

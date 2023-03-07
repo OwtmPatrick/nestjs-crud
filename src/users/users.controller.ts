@@ -21,6 +21,15 @@ export class UsersController {
     return await this.serv.findAll();
   }
 
+  @Get('/:id')
+  public async findOne(@Param('id') id: string) {
+    const user: User | null = await this.serv.findOne(id);
+
+    if (user) return user;
+
+    return 'Unable to find that user';
+  }
+
   @Post('/create')
   async create(@Body() newUser: User) {
     await this.serv.create(newUser);
